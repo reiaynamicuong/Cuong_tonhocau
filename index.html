@@ -132,10 +132,10 @@
     const audioElement = document.getElementById('background-music');
     const goodbyeMessage = document.getElementById('goodbyeMessage');
     
-    // Khi Intro kết thúc, chuyển sang trang chính
-    setTimeout(function() {
-      document.querySelector('.container').style.display = 'block';
-    }, 0000); // 1 giây delay cho intro
+// Khi Intro kết thúc, chuyển sang trang chính
+setTimeout(function() {
+  document.querySelector('.container').style.display = 'block';
+}, 0); // 0 giây delay cho intro
 
     // Hiển thị các câu khi bấm nút
     function showNextLine() {
