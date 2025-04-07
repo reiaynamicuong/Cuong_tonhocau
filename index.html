@@ -78,14 +78,12 @@
       font-size: 2.5rem;
       color: #ffb6c1;
       transition: transform 0.2s ease;
+      display: inline-block;
+      padding: 10px;
     }
 
     #nextBtn:hover {
       transform: scale(1.2);
-    }
-
-    #nextBtn:before {
-      content: "✈️";
     }
 
     #goodbyeMessage {
@@ -128,7 +126,8 @@
     <div class="subtext" id="line8">Tớ ở đây… vẫn luôn đợi cậu trả lời.</div>
     <div class="subtext" id="line9">Và tớ rất yêu cậu.</div>
 
-    <button id="nextBtn" onclick="showNextLine()"></button>
+    <!-- ✅ Nút có icon trực tiếp -->
+    <button id="nextBtn" onclick="showNextLine()">✈️</button>
   </div>
 
   <div id="goodbyeMessage">
