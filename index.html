@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>cậu giận tớ à?</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -14,7 +18,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      height: 100vh;
+      min-height: 100vh;
       color: #ffb6c1;
       text-align: center;
     }
@@ -25,10 +29,12 @@
       border-radius: 16px;
       box-shadow: 0 0 20px rgba(255,182,193, 0.2);
       display: none;
+      max-width: 600px;
+      width: 90%;
     }
 
     #typewriter {
-      font-size: 2rem;
+      font-size: 6vw;
       white-space: nowrap;
       overflow: hidden;
       border-right: 2px solid #ffb6c1;
@@ -43,13 +49,12 @@
     }
 
     @keyframes blink {
-      0% { border-color: transparent }
+      0%, 100% { border-color: transparent }
       50% { border-color: #ffb6c1 }
-      100% { border-color: transparent }
     }
 
     .subtext {
-      font-size: 1.1rem;
+      font-size: 1rem;
       opacity: 0;
       margin: 10px 0;
       padding: 10px;
@@ -70,7 +75,7 @@
       background-color: transparent;
       border: none;
       cursor: pointer;
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: #ffb6c1;
       transition: transform 0.2s ease;
     }
@@ -81,47 +86,55 @@
 
     #nextBtn:before {
       content: "✈️";
-      font-size: 2rem;
     }
 
     #goodbyeMessage {
       display: none;
       margin-top: 20px;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: #ffb6c1;
       padding: 20px;
       border: 2px solid #ffb6c1;
       border-radius: 12px;
       background-color: rgba(255, 255, 255, 0.1);
+      width: 90%;
+      max-width: 500px;
     }
 
     audio {
       display: none;
     }
+
+    @media (min-width: 600px) {
+      #typewriter {
+        font-size: 2rem;
+      }
+      .subtext {
+        font-size: 1.1rem;
+      }
+    }
   </style>
 </head>
 <body>
-    <div class="container">
-      <div id="typewriter">cậu giận tớ à?</div>
-      <div class="subtext" id="line1">Nếu tớ sai… thì cho tớ cơ hội được xin lỗi được không?</div>
-      <div class="subtext" id="line2">Tớ không biết tại sao câu lại bảo tớ lăng nhăng nhưng tớ biết tớ sai cậu cho tới cơ hội nhé.</div>
-      <div class="subtext" id="line3">Tớ chắc tệ lắm trong mắt của cậu.</div>
-      <div class="subtext" id="line4">Nhưng trong mắt tớ cậu là người đẹp nhất.</div>
-      <div class="subtext" id="line5">Tớ xin lỗi vì những lần tớ không bao giờ chủ động.</div>
-      <div class="subtext" id="line6">Một phần là tớ không nghĩ mình sẽ hợp với cậu vì cậu rất giỏi.</div>
-      <div class="subtext" id="line7">Tớ không biết phải làm gì ngoài việc nhớ cậu mỗi ngày.</div>
-      <div class="subtext" id="line8">Tớ ở đây… vẫn luôn đợi cậu trả lời.</div>
-      <div class="subtext" id="line9">Và tớ rất yêu cậu.</div>
-  
-      <button id="nextBtn" onclick="showNextLine()"></button>
+  <div class="container">
+    <div id="typewriter">cậu giận tớ à?</div>
+    <div class="subtext" id="line1">Nếu tớ sai… thì cho tớ cơ hội được xin lỗi được không?</div>
+    <div class="subtext" id="line2">Tớ không biết tại sao cậu lại bảo tớ lăng nhăng nhưng tớ biết tớ sai, cậu cho tớ cơ hội nhé.</div>
+    <div class="subtext" id="line3">Tớ chắc tệ lắm trong mắt của cậu.</div>
+    <div class="subtext" id="line4">Nhưng trong mắt tớ cậu là người đẹp nhất.</div>
+    <div class="subtext" id="line5">Tớ xin lỗi vì những lần tớ không bao giờ chủ động.</div>
+    <div class="subtext" id="line6">Một phần là tớ không nghĩ mình sẽ hợp với cậu vì cậu rất giỏi.</div>
+    <div class="subtext" id="line7">Tớ không biết phải làm gì ngoài việc nhớ cậu mỗi ngày.</div>
+    <div class="subtext" id="line8">Tớ ở đây… vẫn luôn đợi cậu trả lời.</div>
+    <div class="subtext" id="line9">Và tớ rất yêu cậu.</div>
+
+    <button id="nextBtn" onclick="showNextLine()"></button>
   </div>
 
-  <!-- Chào tạm biệt -->
   <div id="goodbyeMessage">
     Cảm ơn cậu đã lắng nghe. Chúc cậu một ngày vui vẻ!
   </div>
 
-  <!-- Nhạc nền -->
   <audio id="background-music" autoplay loop>
     <source src="sound/Shouldnt Be.mp3" type="audio/mpeg" />
     Trình duyệt của bạn không hỗ trợ phát nhạc.
@@ -131,43 +144,38 @@
     let currentLine = 1;
     const audioElement = document.getElementById('background-music');
     const goodbyeMessage = document.getElementById('goodbyeMessage');
-    
-// Khi Intro kết thúc, chuyển sang trang chính
-setTimeout(function() {
-  document.querySelector('.container').style.display = 'block';
-}, 0); // 0 giây delay cho intro
 
-    // Hiển thị các câu khi bấm nút
+    setTimeout(() => {
+      document.querySelector('.container').style.display = 'block';
+    }, 0);
+
     function showNextLine() {
       const line = document.getElementById(`line${currentLine}`);
       if (line) {
         line.classList.add('show');
         currentLine++;
       } else {
-        // Nếu đã hết câu, ẩn nút và bắt đầu giảm âm lượng
         document.getElementById('nextBtn').style.display = 'none';
         fadeOutMusic();
       }
     }
 
-    // Giảm âm lượng và tắt nhạc từ từ
     function fadeOutMusic() {
       let volume = audioElement.volume;
       let fadeInterval = setInterval(() => {
         if (volume > 0) {
-          volume -= 0.05; // Giảm âm lượng dần
+          volume -= 0.05;
           audioElement.volume = volume;
         } else {
-          clearInterval(fadeInterval);  // Dừng khi âm lượng bằng 0
-          audioElement.pause(); // Tắt nhạc
-          showGoodbyeMessage(); // Hiển thị chào tạm biệt
+          clearInterval(fadeInterval);
+          audioElement.pause();
+          showGoodbyeMessage();
         }
       }, 200);
     }
 
-    // Hiển thị bảng chào tạm biệt
     function showGoodbyeMessage() {
-      goodbyeMessage.style.display = 'block'; // Hiển thị thông điệp chào tạm biệt
+      goodbyeMessage.style.display = 'block';
     }
   </script>
 </body>
